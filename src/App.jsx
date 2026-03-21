@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import manusysLogo from "./assets/ame_logo.jpg";
+import deptBuilding from "./assets/dept_building.png";
 import kollywoodQuizImg from "./assets/kollywood_quiz.png";
 import quantumQuiverImg from "./assets/quantum_quiver.png";
 import technicalQuizImg from "./assets/technical_quiz.png";
@@ -103,18 +104,22 @@ const sponsors = [
 
 const SponsorsMarquee = () => {
   const [current, setCurrent] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const [fading, setFading] = useState(false);
+
+  const goTo = (idx) => {
+    setFading(true);
+    setTimeout(() => {
+      setCurrent(idx);
+      setFading(false);
+    }, 400);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setCurrent((prev) => (prev + 1) % sponsors.length);
-        setVisible(true);
-      }, 500);
-    }, 3000);
+      goTo((current + 1) % sponsors.length);
+    }, 3500);
     return () => clearInterval(interval);
-  }, []);
+  }, [current]);
 
   return (
     <div className="sponsors-section">
@@ -123,17 +128,29 @@ const SponsorsMarquee = () => {
         <span className="sponsors-title">OUR SPONSORS</span>
         <span className="sponsors-line" />
       </div>
-      <div className="sponsor-spotlight">
-        <div className={`sponsor-spotlight-logo ${visible ? "sp-visible" : "sp-hidden"}`}>
+
+      <div className="sponsor-full-card">
+        {/* Blurred bg */}
+        <div
+          className="sponsor-full-bg"
+          style={{ backgroundImage: `url(${sponsors[current].img})` }}
+        />
+        {/* Logo centered */}
+        <div className={`sponsor-full-logo ${fading ? "sp-fade-out" : "sp-fade-in"}`}>
           <img src={sponsors[current].img} alt={sponsors[current].name} />
         </div>
+        {/* Dots */}
         <div className="sponsor-dots">
           {sponsors.map((_, i) => (
-            <span key={i} className={`sponsor-dot ${i === current ? "active" : ""}`}
-              onClick={() => { setVisible(false); setTimeout(() => { setCurrent(i); setVisible(true); }, 300); }} />
+            <span
+              key={i}
+              className={`sponsor-dot ${i === current ? "active" : ""}`}
+              onClick={() => goTo(i)}
+            />
           ))}
         </div>
       </div>
+
       <div className="sponsors-thankyou">
         <img src={thankyouBunny} alt="Thank you" className="thankyou-bunny" />
         <div className="thankyou-heading">Thank you for Sponsoring</div>
@@ -143,17 +160,27 @@ const SponsorsMarquee = () => {
 };
 
 /* ─── HOME ───────────────────────────────────────────────── */
+const aboutSections = [
+  {
+    label: "Department",
+    content: "The Department of Manufacturing Engineering at College of Engineering, Guindy is one of the premier departments dedicated to advancing knowledge and innovation in manufacturing technologies. With a strong academic legacy, the department focuses on equipping students with both theoretical foundations and practical skills required in modern industrial environments. The department offers undergraduate, postgraduate, and research programs that cover key areas such as production processes, automation, computer-aided manufacturing (CAM), robotics, industrial engineering, and smart manufacturing systems.",
+  },
+  {
+    label: "AME",
+    content: "The Association of Manufacturing Engineering (AME) is the official student body of the Department of Manufacturing Engineering at College of Engineering, Guindy. It serves as a platform to promote technical knowledge, innovation, and professional development among students. AME plays a vital role in bridging the gap between academic learning and industrial practices by organizing a wide range of activities, including technical workshops, seminars, symposiums, guest lectures, and industrial visits.",
+  },
+  {
+    label: "Manusys",
+    content: "MANUSYS is the flagship national-level technical symposium organized by the Association of Manufacturing Engineering (AME) of the Department of Manufacturing Engineering at College of Engineering, Guindy.",
+  },
+];
+
 const Home = () => {
   const letters = ["M", "A", "N", "U", "S", "Y", "S"];
-  const [active, setActive] = useState("Department");
-  const aboutSections = [
-    { label: "Department", content: "The Department of Manufacturing Engineering at College of Engineering, Guindy is one of the premier departments dedicated to advancing knowledge and innovation in manufacturing technologies. With a strong academic legacy, the department focuses on equipping students with both theoretical foundations and practical skills required in modern industrial environments. The department offers undergraduate, postgraduate, and research programs that cover key areas such as production processes, automation, computer-aided manufacturing (CAM), robotics, industrial engineering, and smart manufacturing systems." },
-    { label: "AME", content: "The Association of Manufacturing Engineering (AME) is the official student body of the Department of Manufacturing Engineering at College of Engineering, Guindy. It serves as a platform to promote technical knowledge, innovation, and professional development among students. AME plays a vital role in bridging the gap between academic learning and industrial practices by organizing a wide range of activities, including technical workshops, seminars, symposiums, guest lectures, and industrial visits." },
-    { label: "Manusys", content: "MANUSYS is the flagship national-level technical symposium organized by the Association of Manufacturing Engineering (AME) of the Department of Manufacturing Engineering at College of Engineering, Guindy." },
-  ];
 
   return (
     <section className="home-section">
+      {/* Hero letters */}
       <div className="manusys-row">
         {letters.map((letter, i) => <span key={i} style={{ animationDelay: `${i * 0.2}s` }}>{letter}</span>)}
       </div>
@@ -162,21 +189,27 @@ const Home = () => {
         <span className="industry-text">INDUSTRY 5.0</span>
         <span className="industry-line" />
       </div>
-      <div className="about-glass-panel">
-        <div className="about-tabs-row">
-          <span className="about-heading">About</span>
-          <div className="about-tab-pills">
-            {aboutSections.map((s) => (
-              <button key={s.label} className={`about-tab-pill ${active === s.label ? "active" : ""}`} onClick={() => setActive(s.label)}>{s.label}</button>
-            ))}
-          </div>
-        </div>
-        <div className="about-glass-body">
-          {aboutSections.map((s) => (
-            <p key={s.label} className={`about-glass-text ${active === s.label ? "visible" : "hidden"}`}>{s.content}</p>
-          ))}
+
+      {/* Department building image */}
+      <div className="dept-building-wrap">
+        <img src={deptBuilding} alt="Department of Manufacturing Engineering" className="dept-building-img" />
+        <div className="dept-building-overlay">
+          <span>Department of Manufacturing Engineering</span>
+          <span className="dept-building-sub">College of Engineering, Guindy · Anna University</span>
         </div>
       </div>
+
+      {/* About — stacked single page */}
+      <div className="about-stack-panel">
+        <div className="about-stack-heading">About</div>
+        {aboutSections.map((s, i) => (
+          <div key={i} className="about-stack-block">
+            <div className="about-stack-label">{s.label}</div>
+            <p className="about-stack-text">{s.content}</p>
+          </div>
+        ))}
+      </div>
+
       <SponsorsMarquee />
     </section>
   );
@@ -248,20 +281,20 @@ const domains = [
     name: "Human Resources",
     color: "rgba(0,150,255,0.7)",
     members: [
-      { name: "Akash J", img: teamAkash },
-      { name: "Vishnu K", img: teamVishnu },
-      { name: "Dhivya E", img: teamDhivya },
-      { name: "Hariharan M", img: teamHariharan },
+      { name: "Akash J", img: teamAlthin },
+      { name: "Vishnu K", img: teamRoshan },
+      { name: "Dhivya E", img: teamDaksshin },
+      { name: "Hariharan M", img: teamNavinkumaar },
     ],
   },
   {
     name: "Industrial Relations",
     color: "rgba(230,120,180,0.7)",
     members: [
-      { name: "Althin S V", img: teamAlthin },
-      { name: "Roshan T", img: teamRoshan },
-      { name: "Daksshin G", img: teamDaksshin },
-      { name: "Navinkumaar P", img: teamNavinkumaar },
+      { name: "Althin S V", img: teamAkash },
+      { name: "Roshan T", img: teamVishnu },
+      { name: "Daksshin G", img: teamDhivya },
+      { name: "Navinkumaar P", img: teamHariharan },
     ],
   },
   {
@@ -302,69 +335,57 @@ const domains = [
   },
 ];
 
-const DomainHeads = () => {
-  const [activeDomain, setActiveDomain] = useState(0);
-
-  return (
-    <section className="content-section dh-section">
-      {/* Domain selector pills */}
-      <div className="dh-selector">
-        {domains.map((d, i) => (
-          <button
-            key={i}
-            className={`dh-pill ${activeDomain === i ? "active" : ""}`}
-            style={activeDomain === i ? { borderColor: d.color, color: d.color, boxShadow: `0 0 14px ${d.color.replace("0.7","0.2")}` } : {}}
-            onClick={() => setActiveDomain(i)}
-          >
-            {d.name}
-          </button>
-        ))}
-      </div>
-
-      {/* Active domain title */}
-      <div className="dh-domain-title" style={{ color: domains[activeDomain].color }}>
-        {domains[activeDomain].name}
-      </div>
-
-      {/* Member cards — photo fills card, name badge overlaid at bottom */}
-      <div className="dh-members-grid">
-        {domains[activeDomain].members.map((m, i) => (
-          <div key={i} className="dh-member-card" style={{ animationDelay: `${i * 0.08}s`, borderColor: domains[activeDomain].color }}>
-            <img src={m.img} alt={m.name} className="dh-member-photo" />
-            <div className="dh-member-badge">
-              <div className="dh-member-name">{m.name}</div>
+const DomainHeads = () => (
+  <section className="content-section dh-section">
+    {domains.map((d, di) => (
+      <div key={di} className="dh-domain-block">
+        <div className="dh-domain-title" style={{ color: d.color }}>
+          <span className="dh-title-bar" style={{ background: d.color }} />
+          {d.name}
+        </div>
+        <div className="dh-members-grid">
+          {d.members.map((m, i) => (
+            <div
+              key={i}
+              className="dh-member-card"
+              style={{ animationDelay: `${(di * 4 + i) * 0.06}s`, borderColor: d.color }}
+            >
+              <img src={m.img} alt={m.name} className="dh-member-photo" />
+              <div className="dh-member-badge">
+                <div className="dh-member-name">{m.name}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </section>
-  );
-};
+    ))}
+  </section>
+);
 
 /* ─── CONTACT ────────────────────────────────────────────── */
 const MAPS_URL = "https://www.google.com/maps/dir/13.1200686,80.2255645/Department+Of+Manufacturing+Engineering,+Department,+MANUFACTURING+ENGINEERING+LAB,+ANNA+UNIVERSITY,+1,+1st+Cross+Rd,+Anna+University,+Kotturpuram,+Chennai,+Tamil+Nadu+600025/@13.0692565,80.1463476,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a52679f852757c9:0x32065fe84d11a197!2m2!1d80.234133!2d13.0120241?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D";
 
 const hrTeam = [
-  { name: "Akash J",     phone: "+918825816578" },
-  { name: "Vishnu K",    phone: "+918300362201" },
-  { name: "Hariharan",   phone: "+918248537781" },
-  { name: "Swatiha V",   phone: "+918925083884" },
-  { name: "Dhivya E",    phone: "+919345668253" },
+  { name: "Akash J",   phone: "+918825816578" },
+  { name: "Vishnu K",  phone: "+918300362201" },
+  { name: "Hariharan", phone: "+918248537781" },
+  { name: "Swatiha V", phone: "+918925083884" },
+  { name: "Dhivya E",  phone: "+919345668253" },
 ];
 
 const Contact = () => (
   <section className="content-section contact-section">
     <div className="contact-grid">
 
-      {/* Secretary */}
-      <div className="contact-card">
-        <div className="contact-icon">👤</div>
+      {/* Secretary — phone tap */}
+      <a href="tel:+917094450191" className="contact-card contact-card-link">
+        <div className="contact-icon">📞</div>
         <div className="contact-role">Secretary</div>
         <div className="contact-name">Rusil V</div>
-        <a href="tel:+917094450191" className="contact-phone-link">+91 7094450191</a>
-      </div>
+        <div className="contact-detail">+91 70944 50191</div>
+      </a>
 
-      {/* Venue — links to Google Maps */}
+      {/* Venue — Google Maps */}
       <div className="contact-card contact-card-link" onClick={() => window.open(MAPS_URL, "_blank")}>
         <div className="contact-icon">📍</div>
         <div className="contact-role">Venue</div>
@@ -380,13 +401,6 @@ const Contact = () => (
         <div className="contact-detail">Follow for updates</div>
       </div>
 
-      {/* Email */}
-      <div className="contact-card">
-        <div className="contact-icon">📧</div>
-        <div className="contact-role">Email</div>
-        <div className="contact-name">ame.manusys@ceg.edu.in</div>
-        <div className="contact-detail">Response within 24 hrs</div>
-      </div>
     </div>
 
     {/* HR Team */}
@@ -398,11 +412,13 @@ const Contact = () => (
       </div>
       <div className="contact-hr-grid">
         {hrTeam.map((p, i) => (
-          <a key={i} href={`tel:${p.phone}`} className="contact-hr-chip">
+          <a key={i} href={"tel:" + p.phone} className="contact-hr-chip">
             <span className="contact-hr-icon">📞</span>
             <div className="contact-hr-info">
               <div className="contact-hr-name">{p.name}</div>
-              <div className="contact-hr-num">{p.phone.replace(/(\+\d{2})(\d{5})(\d{5})/, "$1 $2 $3")}</div>
+              <div className="contact-hr-num">
+                {p.phone.slice(0,3) + " " + p.phone.slice(3,8) + " " + p.phone.slice(8)}
+              </div>
             </div>
           </a>
         ))}
