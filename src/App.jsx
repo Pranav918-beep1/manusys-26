@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import manusysLogo from "./assets/ame_logo.jpg";
+import manusysMIcon from "./assets/manusys_m_logo.png";
 import deptBuilding from "./assets/dept_building.png";
 import kollywoodQuizImg from "./assets/kollywood_quiz.png";
 import quantumQuiverImg from "./assets/quantum_quiver.png";
@@ -50,6 +51,14 @@ import teamSujith from "./assets/team_sujith.png";
 import teamDhiyaneswaran from "./assets/team_dhiyaneswaran.png";
 import teamAarthi from "./assets/team_aarthi.png";
 import teamVasanthakumar from "./assets/team_vasanthakumar.png";
+import teamKishore from "./assets/team_kishore.png";
+import teamMalavika2 from "./assets/team_malavika2.png";
+import teamSanthiya from "./assets/team_santhiya.png";
+import teamGokul from "./assets/team_gokul.png";
+import teamRoshni from "./assets/team_roshni.png";
+import teamIsrar from "./assets/team_israr.png";
+import teamVishwaKarthik from "./assets/team_vishwakarthik.png";
+import teamPragadeeshwaran from "./assets/team_pragadeeshwaran.png";
 
 /* ─── STARFIELD ──────────────────────────────────────────── */
 const Starfield = () => {
@@ -74,16 +83,33 @@ const Starfield = () => {
 
 /* ─── NAV ────────────────────────────────────────────────── */
 const Nav = ({ activeTab, setActiveTab }) => {
-  const tabs = ["Home", "Events", "Workshops", "Domain Heads", "Contact"];
+  const tabs = ["Home", "Events", "Workshops", "Team", "Contact"];
+  const tabRefs = React.useRef([]);
+  const pillRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const idx = tabs.indexOf(activeTab);
+    const activeEl = tabRefs.current[idx];
+    const pill = pillRef.current;
+    if (activeEl && pill) {
+      const { offsetLeft, offsetWidth } = activeEl;
+      pill.style.left = offsetLeft + "px";
+      pill.style.width = offsetWidth + "px";
+    }
+  }, [activeTab]);
+
   return (
     <nav className="nav-bar">
       <div className="nav-logo-small">
         <img src={manusysLogo} alt="Manusys" className="nav-logo-img" />
       </div>
-      <div className="nav-tabs">
-        {tabs.map((tab) => (
+      <div className="nav-tabs" style={{ position: "relative" }}>
+        {/* Sliding pill */}
+        <div ref={pillRef} className="nav-sliding-pill" />
+        {tabs.map((tab, i) => (
           <button
             key={tab}
+            ref={el => tabRefs.current[i] = el}
             className={`nav-tab ${activeTab === tab ? "active" : ""}`}
             onClick={() => setActiveTab(tab)}
           >
@@ -91,6 +117,9 @@ const Nav = ({ activeTab, setActiveTab }) => {
           </button>
         ))}
       </div>
+      <button className="nav-m-logo-btn" onClick={() => setActiveTab("Home")} title="Go to Home">
+        <img src={manusysMIcon} alt="Manusys" className="nav-m-logo" />
+      </button>
     </nav>
   );
 };
@@ -198,6 +227,11 @@ const Home = () => {
         <span className="industry-line" />
       </div>
 
+      {/* Manusys M logo — centered, links to home (already on home, acts as brand mark) */}
+      <div className="home-m-logo-wrap">
+        <img src={manusysMIcon} alt="Manusys" className="home-m-logo" />
+      </div>
+
       {/* Department building image */}
       <div className="dept-building-wrap" style={{ backgroundImage: `url(${deptBuilding})` }}>
         <div className="dept-building-overlay">
@@ -259,7 +293,7 @@ const EventCard = ({ image, title, description, date, prize, contacts, registerL
 
 const techEventsData = [
   { image: quantumQuiverImg, onSpot: false, title: "Quantum Quiver — Q²", description: "A line follower bot competition where your bot must illuminate the way! Build a bot that follows the line through 3 challenging rounds. Team size: up to 5 members.", date: "March 26 & 27", prize: "Exciting cash prizes up to ₹15,000", contacts: ["Haresh G: 6369610507", "Nithesh SK: 8608126812"], registerLink: "https://forms.gle/pASgu2BfSyBD89xRA" },
-  { image: technicalQuizImg, onSpot: true, title: "Technical Quiz", description: "Think sharp. Answer fast. Stay ahead. Put your technical knowledge to the test and compete with the brightest minds — from core concepts to tricky questions. Prove your skills here!", date: "March 26", prize: "Entry Free · Win Exciting Prizes", contacts: ["Divya K: +91 81226 84027", "Rushwanth: +91 80566 58677"], registerLink: "#", onSpot: false },
+  { image: technicalQuizImg, onSpot: true, title: "Technical Quiz", description: "Think sharp. Answer fast. Stay ahead. Put your technical knowledge to the test and compete with the brightest minds — from core concepts to tricky questions. Prove your skills here!", date: "March 26", prize: "Entry Free · Win Exciting Prizes", contacts: ["Divya K: +91 81226 84027", "Rushwanth: +91 80566 58677"], registerLink: "#" },
   { image: projectDisplayImg, onSpot: false, title: "Project Display", description: "Innovation is nothing without a platform to showcase it. Project Display at MANUSYS 2026 gives engineering minds the stage they deserve — to present, demonstrate, and inspire. Come witness the future of manufacturing, built by CEG.", date: "March 27 · Ground Floor, Manufacturing Department", prize: null, contacts: ["Viswa Karthick: 7695988617", "Malavika: 7358084937"], registerLink: "https://forms.gle/X9fD1bWpvik4JWsF9" },
   { image: silentIdeationImg, onSpot: true, title: "Silent Ideation", description: "No debates. No distractions. Just pure, unfiltered ideas. Silent Ideation — where the loudest minds think in silence. The floor is yours. Your thoughts are your weapon. Use them.", date: "March 27 · Room No. 304, Manufacturing Department", prize: null, contacts: ["Mansha DF: +91 81226 59768", "Viswa Karthick: +91 76959 88617"], registerLink: "#" },
   { image: problemPerspectiveImg, onSpot: true, title: "Problem Perspective", description: "Every problem has a perspective — and the right one changes everything. Join us at Problem Perspective, where analytical thinking meets engineering precision. Come ready to think, question, and solve.", date: "March 27 · Room No. 304, Manufacturing Engineering Department", prize: null, contacts: ["Viswa Karthick S: +91 76959 88617", "Naveena Bharathi: +91 82205 41367"], registerLink: "#" },
@@ -316,7 +350,59 @@ const Workshops = () => (
   </section>
 );
 
-/* ─── DOMAIN HEADS ───────────────────────────────────────── */
+
+/* ─── OFFICE BEARERS ─────────────────────────────────────── */
+const officeBearers = [
+  { name: "Kishore Kumar", role: "Student Treasurer", img: teamKishore },
+  { name: "Malavika", role: "Events Secretary", img: teamMalavika2 },
+  { name: "Santhiya", role: "Alumni Relations", img: teamSanthiya },
+  { name: "Gokul", role: "Junior Secretary", img: teamGokul },
+  { name: "Roshni", role: "Junior Secretary", img: teamRoshni },
+  { name: "Israr", role: "Alumni Relations", img: teamIsrar },
+  { name: "Vishwa Karthik", role: "Events", img: teamVishwaKarthik },
+];
+
+const Team = () => (
+  <section className="content-section dh-section">
+
+    {/* ── Office Bearers ── */}
+    <div className="team-sub-heading">Office Bearers</div>
+    <div className="dh-members-grid ob-grid">
+      {officeBearers.map((m, i) => (
+        <div key={i} className="dh-member-card ob-card" style={{ animationDelay: `${i * 0.07}s`, borderColor: "rgba(212,168,67,0.5)" }}>
+          <img src={m.img} alt={m.name} className="dh-member-photo" />
+          <div className="dh-member-badge">
+            <div className="dh-member-name">{m.name}</div>
+            <div className="dh-member-role">{m.role}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* ── Domain Heads ── */}
+    <div className="team-sub-heading" style={{ marginTop: "2.5rem" }}>Domain Heads</div>
+    {domains.map((d, di) => (
+      <div key={di} className="dh-domain-block">
+        <div className="dh-domain-title" style={{ color: d.color }}>
+          <span className="dh-title-bar" style={{ background: d.color }} />
+          {d.name}
+        </div>
+        <div className="dh-members-grid">
+          {d.members.map((m, i) => (
+            <div key={i} className="dh-member-card" style={{ animationDelay: `${(di * 4 + i) * 0.06}s`, borderColor: d.color }}>
+              <img src={m.img} alt={m.name} className="dh-member-photo" />
+              <div className="dh-member-badge">
+                <div className="dh-member-name">{m.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+);
+
+/* ─── DOMAIN HEADS (kept for data) ─────────────────────── */
 const domains = [
   {
     name: "Human Resources",
@@ -379,6 +465,7 @@ const domains = [
     color: "rgba(255,160,60,0.75)",
     members: [
       { name: "Sujith P", img: teamSujith },
+      { name: "Pragadeeshwaran", img: teamPragadeeshwaran },
     ],
   },
   {
@@ -485,8 +572,18 @@ const Contact = () => (
 /* ─── FOOTER ─────────────────────────────────────────────── */
 const Footer = () => (
   <footer className="footer-note">
-    <img src={manusysLogo} alt="Manusys" className="footer-logo-img" />
-    <span>MANUSYS · Manufacturing Symposium · AME · CEG · Anna University</span>
+    <img src={manusysMIcon} alt="Manusys" className="footer-logo-img footer-m-logo" />
+    <div className="footer-contacts">
+      <a href="tel:+917094450191" className="footer-contact-chip">
+        <span>📞</span><span>Rusil · +91 70944 50191</span>
+      </a>
+      <a href="tel:+919790347160" className="footer-contact-chip">
+        <span>📞</span><span>Kishore Kumar · +91 97903 47160</span>
+      </a>
+      <a href="https://www.instagram.com/manusys_ceg/" target="_blank" rel="noopener noreferrer" className="footer-contact-chip">
+        <span>📸</span><span>@manusys_ceg</span>
+      </a>
+    </div>
   </footer>
 );
 
@@ -498,7 +595,7 @@ export default function App() {
       case "Home": return <Home />;
       case "Events": return <Events />;
       case "Workshops": return <Workshops />;
-      case "Domain Heads": return <DomainHeads />;
+      case "Team": return <Team />;
       case "Contact": return <Contact />;
       default: return <Home />;
     }
@@ -508,8 +605,8 @@ export default function App() {
       <Starfield />
       <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="homepage">
-        {activeTab === "Home" && <Home />}
-        {activeTab !== "Home" && <div className="tab-content-area">{renderSection()}</div>}
+        {activeTab === "Home" && <div key="home" className="page-transition"><Home /></div>}
+        {activeTab !== "Home" && <div key={activeTab} className="page-transition tab-content-area">{renderSection()}</div>}
       </div>
       <Footer />
     </div>
