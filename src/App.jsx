@@ -10,6 +10,9 @@ import silentIdeationImg from "./assets/silent_ideation.png";
 import connexionsImg from "./assets/connexions.png";
 import treasureHuntImg from "./assets/treasure_hunt.png";
 import soundPartyImg from "./assets/sound_party.png";
+import workshopCobotsImg from "./assets/workshop_cobots.png";
+import iplAuctionImg from "./assets/ipl_auction.png";
+import problemPerspectiveImg from "./assets/problem_perspective.png";
 import sponsorRp3d from "./assets/sponsor_rp3d.png";
 import sponsorElcon from "./assets/sponsor_elcon.png";
 import sponsorDome from "./assets/sponsor_dome.png";
@@ -22,6 +25,7 @@ import sponsorTspc from "./assets/sponsor_tspc.png";
 import sponsorVinayaga from "./assets/sponsor_vinayaga.png";
 import sponsorNanoTech from "./assets/sponsor_nano_tech.png";
 import thankyouBunny from "./assets/thankyou_bunny.png";
+import instagramLogo from "./assets/instagram_logo.png";
 import teamAkash from "./assets/team_akash.png";
 import teamVishnu from "./assets/team_vishnu.png";
 import teamDhivya from "./assets/team_dhivya.png";
@@ -195,8 +199,7 @@ const Home = () => {
       </div>
 
       {/* Department building image */}
-      <div className="dept-building-wrap">
-        <img src={deptBuilding} alt="Department of Manufacturing Engineering" className="dept-building-img" />
+      <div className="dept-building-wrap" style={{ backgroundImage: `url(${deptBuilding})` }}>
         <div className="dept-building-overlay">
           <span>Department of Manufacturing Engineering</span>
           <span className="dept-building-sub">College of Engineering, Guindy · Anna University</span>
@@ -220,7 +223,7 @@ const Home = () => {
 };
 
 /* ─── EVENT CARD ─────────────────────────────────────────── */
-const EventCard = ({ image, title, description, date, prize, contacts, registerLink, delay }) => (
+const EventCard = ({ image, title, description, date, prize, contacts, registerLink, onSpot, delay }) => (
   <div className="ev-card" style={{ animationDelay: `${delay}s` }}>
     <div className="ev-card-img-wrap">
       <img src={image} alt={title} className="ev-card-img" />
@@ -232,25 +235,41 @@ const EventCard = ({ image, title, description, date, prize, contacts, registerL
       <p className="ev-card-desc">{description}</p>
       {contacts && contacts.length > 0 && (
         <div className="ev-card-contacts">
-          {contacts.map((c, i) => <div key={i} className="ev-contact-row"><span className="ev-contact-icon">📞</span><span>{c}</span></div>)}
+          {contacts.map((c, i) => {
+            const phoneMatch = c.match(/[\d\s+]{10,}/);
+            const phone = phoneMatch ? phoneMatch[0].replace(/\s/g, "") : null;
+            return phone ? (
+              <a key={i} href={"tel:" + phone} className="ev-contact-row">
+                <span className="ev-contact-icon">📞</span><span>{c}</span>
+              </a>
+            ) : (
+              <div key={i} className="ev-contact-row"><span className="ev-contact-icon">📞</span><span>{c}</span></div>
+            );
+          })}
         </div>
       )}
-      <a href={registerLink || "#"} target="_blank" rel="noopener noreferrer" className="ev-register-btn">Register Now →</a>
+      {onSpot ? (
+        <div className="ev-onspot-badge">On-Spot Registration</div>
+      ) : (
+        <a href={registerLink || "#"} target="_blank" rel="noopener noreferrer" className="ev-register-btn">Register Now →</a>
+      )}
     </div>
   </div>
 );
 
 const techEventsData = [
-  { image: quantumQuiverImg, title: "Quantum Quiver — Q²", description: "A line follower bot competition where your bot must illuminate the way! Build a bot that follows the line through 3 challenging rounds. Team size: up to 5 members.", date: "March 26 & 27", prize: "Exciting cash prizes up to ₹15,000", contacts: ["Haresh G: 6369610507", "Nithesh SK: 8608126812"], registerLink: "https://forms.gle/pASgu2BfSyBD89xRA" },
-  { image: technicalQuizImg, title: "Technical Quiz", description: "Description coming soon.", date: "March 26", prize: "Entry Free · Win Exciting Prizes", contacts: ["Divya K: +91 81226 84027", "Rushwanth: +91 80566 58677"], registerLink: "#" },
-  { image: projectDisplayImg, title: "Project Display", description: "Description coming soon.", date: "March 27", prize: null, contacts: ["Viswa Karthick: 7695988617", "Malavika: 7358084937"], registerLink: "#" },
-  { image: silentIdeationImg, title: "Silent Ideation", description: "Description coming soon.", date: "March 26", prize: null, contacts: ["Mansha DF: +91 81226 59768", "Viswa Karthick: +91 76959 88617"], registerLink: "#" },
+  { image: quantumQuiverImg, onSpot: false, title: "Quantum Quiver — Q²", description: "A line follower bot competition where your bot must illuminate the way! Build a bot that follows the line through 3 challenging rounds. Team size: up to 5 members.", date: "March 26 & 27", prize: "Exciting cash prizes up to ₹15,000", contacts: ["Haresh G: 6369610507", "Nithesh SK: 8608126812"], registerLink: "https://forms.gle/pASgu2BfSyBD89xRA" },
+  { image: technicalQuizImg, onSpot: false, title: "Technical Quiz", description: "Think sharp. Answer fast. Stay ahead. Put your technical knowledge to the test and compete with the brightest minds — from core concepts to tricky questions. Prove your skills here!", date: "March 26", prize: "Entry Free · Win Exciting Prizes", contacts: ["Divya K: +91 81226 84027", "Rushwanth: +91 80566 58677"], registerLink: "#", onSpot: false },
+  { image: projectDisplayImg, onSpot: true, title: "Project Display", description: "Innovation is nothing without a platform to showcase it. Project Display at MANUSYS 2026 gives engineering minds the stage they deserve — to present, demonstrate, and inspire. Come witness the future of manufacturing, built by CEG.", date: "March 27 · Ground Floor, Manufacturing Department", prize: null, contacts: ["Viswa Karthick: 7695988617", "Malavika: 7358084937"], registerLink: "#" },
+  { image: silentIdeationImg, onSpot: true, title: "Silent Ideation", description: "No debates. No distractions. Just pure, unfiltered ideas. Silent Ideation — where the loudest minds think in silence. The floor is yours. Your thoughts are your weapon. Use them.", date: "March 27 · Room No. 304, Manufacturing Department", prize: null, contacts: ["Mansha DF: +91 81226 59768", "Viswa Karthick: +91 76959 88617"], registerLink: "#" },
+  { image: problemPerspectiveImg, onSpot: true, title: "Problem Perspective", description: "Every problem has a perspective — and the right one changes everything. Join us at Problem Perspective, where analytical thinking meets engineering precision. Come ready to think, question, and solve.", date: "March 27 · Room No. 304, Manufacturing Engineering Department", prize: null, contacts: ["Viswa Karthick S: +91 76959 88617", "Naveena Bharathi: +91 82205 41367"], registerLink: "#" },
 ];
 const nonTechEventsData = [
-  { image: connexionsImg, title: "Connexions", description: "Description coming soon.", date: "March 27", prize: null, contacts: ["Pavisree: +91 89401 85215", "Rakshanth: +91 95249 29459"], registerLink: "#" },
-  { image: treasureHuntImg, title: "Treasure Hunt", description: "The ultimate campus quest — multiple clues, multiple challenges, multiple winners! Face Sudoku puzzles, game battles, compatibility tests, crazy dares, memory challenges and wild campus tasks. Complete all clues as fast as possible across the department.", date: "March 24 & 25 · 3:30 PM – 6:00 PM / 8:30 AM – 2:00 PM", prize: "Handbags, T-shirts, Watches, Accessories & more! · ₹100 per team of 5", contacts: ["Jayanth: +91 86673 12615", "Dhyanesh: +91 99449 99728"], registerLink: "https://forms.gle/PLcLT33uojGmuGRJ6" },
-  { image: soundPartyImg, title: "Sound Party", description: "Description coming soon.", date: "March 26", prize: null, contacts: ["Venkat: +91 98428 04962", "Abdul Rahman: +91 84288 14584"], registerLink: "#" },
-  { image: kollywoodQuizImg, title: "Kollywood Quiz", description: "Lights… Camera… Quiz! 🎥✨ Are you a true Kollywood fan? Test your knowledge on movies, actors, iconic dialogues, and music from Tamil cinema! From classic hits to blockbuster films — bring your movie knowledge and compete with fellow cinema lovers! 🍿🔥", date: "March 26", prize: "Exciting cash prize", contacts: ["Rithik: +91 98846 37968", "Bhavna: +91 63839 69100"], registerLink: "#" },
+  { image: connexionsImg, onSpot: true, title: "Connexions", description: "The clues are right in front of you — can you connect the dots? Connexions @ MANUSYS 2026: decode the hints, crack the title, beat the clock. Movies. Music. Madness. Are you built for this?", date: "March 27 · Room No. 102, Manufacturing Department", prize: null, contacts: ["Pavisree: +91 89401 85215", "Rakshanth: +91 95249 29459"], registerLink: "#" },
+  { image: treasureHuntImg, onSpot: false, title: "Treasure Hunt", description: "The ultimate campus quest — multiple clues, multiple challenges, multiple winners! Face Sudoku puzzles, game battles, compatibility tests, crazy dares, memory challenges and wild campus tasks. Complete all clues as fast as possible across the department.", date: "March 24 & 25 · 3:30 PM–6:00 PM / 8:30 AM–2:00 PM", prize: "Handbags, T-shirts, Watches & more · ₹100 per team of 5", contacts: ["Jayanth: +91 86673 12615", "Dhyanesh: +91 99449 99728"], registerLink: "https://forms.gle/PLcLT33uojGmuGRJ6" },
+  { image: soundPartyImg, onSpot: true, title: "Sound Party", description: "Every great symposium deserves a moment to unwind. Sound Party at MANUSYS 2026 brings together the best of music, energy, and community — because engineers celebrate hard too.", date: "March 27 · Room No. 301, Manufacturing Department", prize: null, contacts: ["Venkat: +91 98428 04962", "Abdul Rahman: +91 84288 14584"], registerLink: "#" },
+  { image: kollywoodQuizImg, onSpot: true, title: "Kollywood Quiz", description: "Lights… Camera… Quiz! Are you a true Kollywood fan? Test your knowledge on movies, actors, iconic dialogues, and music from Tamil cinema! From classic hits to blockbuster films — bring your movie knowledge and compete with fellow cinema lovers!", date: "March 26 · Room No. 302, Manufacturing Department", prize: "Exciting cash prize", contacts: ["Rithik: +91 98846 37968", "Bhavna: +91 63839 69100"], registerLink: "#" },
+  { image: iplAuctionImg, onSpot: true, title: "IPL Auction", description: "Step into the auction room and build your dream IPL team! Bid smart, strategise hard, and outplay your rivals. Cash prizes await the best team owners. On-spot registration available.", date: "March 26", prize: "Exciting cash prizes", contacts: ["Seenu: +91 81483 78009", "Dhanush: +91 63800 26270", "Bavananthan: +91 91592 36769"], registerLink: "#" },
 ];
 
 /* ─── EVENTS ─────────────────────────────────────────────── */
@@ -272,10 +291,28 @@ const Events = () => {
 };
 
 /* ─── WORKSHOPS ──────────────────────────────────────────── */
+const workshopsData = [
+  {
+    image: workshopCobotsImg,
+    onSpot: true,
+    title: "Cobots in Industry 5.0",
+    description: "The future of manufacturing isn't just automated — it's collaborative. Join us for an exclusive workshop on Cobots in Industry 5.0 at MANUSYS 2026, where you'll explore how collaborative robots are reshaping the shop floor and redefining human-machine interaction.",
+    date: "March 26 · Hall of Guines",
+    prize: "Free Entry",
+    contacts: ["Dhiyanesh: +91 73387 13170"],
+    registerLink: "#",
+  },
+];
+
 const Workshops = () => (
   <section className="content-section">
-    <h2 className="section-title">WORKSHOPS</h2>
-    <div className="events-coming-soon"><span>Nothing Yet</span></div>
+    <div className="events-body">
+      <div className="ev-cards-grid">
+        {workshopsData.map((w, i) => (
+          <EventCard key={i} {...w} delay={i * 0.08} />
+        ))}
+      </div>
+    </div>
   </section>
 );
 
@@ -415,7 +452,7 @@ const Contact = () => (
 
       {/* Instagram */}
       <div className="contact-card contact-card-link" onClick={() => window.open("https://www.instagram.com/manusys_ceg/", "_blank")}>
-        <div className="contact-icon">📸</div>
+        <div className="contact-icon"><img src={instagramLogo} alt="Instagram" className="contact-ig-logo" /></div>
         <div className="contact-role">Instagram</div>
         <div className="contact-name">@manusys_ceg</div>
         <div className="contact-detail">Follow for updates</div>
@@ -434,11 +471,9 @@ const Contact = () => (
         {hrTeam.map((p, i) => (
           <a key={i} href={"tel:" + p.phone} className="contact-hr-chip">
             <span className="contact-hr-icon">📞</span>
-            <div className="contact-hr-info">
-              <div className="contact-hr-name">{p.name}</div>
-              <div className="contact-hr-num">
-                {p.phone.slice(0,3) + " " + p.phone.slice(3,8) + " " + p.phone.slice(8)}
-              </div>
+            <div className="contact-hr-name">{p.name}</div>
+            <div className="contact-hr-num">
+              {p.phone.slice(0,3) + " " + p.phone.slice(3,8) + " " + p.phone.slice(8)}
             </div>
           </a>
         ))}
