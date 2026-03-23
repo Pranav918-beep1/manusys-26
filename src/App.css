@@ -335,6 +335,7 @@ a.ev-contact-row:hover { color: rgba(26,251,240,1); }
   .nav-bar { padding: 0.9rem 0.8rem; }
   .nav-logo-small { left: 0.8rem; }
   .nav-logo-img { width: 34px; height: 34px; }
+  .nav-m-logo-btn { display: none; }
   .nav-tabs { gap: 0.2rem; padding: 0.3rem; }
   .nav-tab { font-size: 0.62rem; padding: 0.55rem 0.9rem; letter-spacing: 0.08em; }
   .homepage { padding: 5rem 1rem 2rem; }
@@ -353,8 +354,7 @@ a.ev-contact-row:hover { color: rgba(26,251,240,1); }
 @media (max-width: 480px) {
   .nav-logo-small { display: none; }
   .nav-m-logo-btn { 
-    left: 0.8rem; 
-    right: auto;
+    display: none;
   }
   .nav-m-logo { width: 36px; height: 36px; }
   .nav-tab { font-size: 0.58rem; padding: 0.5rem 0.75rem; letter-spacing: 0.06em; }
