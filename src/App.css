@@ -339,7 +339,7 @@ a.ev-contact-row:hover { color: rgba(26,251,240,1); }
   .nav-tabs { gap: 0.2rem; padding: 0.3rem; }
   .nav-tab { font-size: 0.62rem; padding: 0.55rem 0.9rem; letter-spacing: 0.08em; }
   .homepage { padding: 5rem 1rem 2rem; }
-  .manusys-row span { font-size: clamp(1.5rem, 9.5vw, 6rem); }
+  .manusys-row span { font-size: clamp(2.5rem, 12vw, 7rem); }
   .content-section { border-radius: 16px; }
   .about-stack-panel { padding: 1.4rem 1.2rem; }
   .events-body { padding: 1.2rem 1rem 0.5rem; }
