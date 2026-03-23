@@ -414,9 +414,8 @@ a.ev-contact-row:hover { color: rgba(26,251,240,1); }
 }
 
 @media (max-width: 500px) {
-  .footer-grid { flex-direction: column; align-items: center; gap: 1.5rem; }
-  .footer-divider-v { display: none; }
-  .footer-col { align-items: center; text-align: center; min-width: unset; }
+  .footer-grid { gap: 2rem; }
+  .footer-col { min-width: 150px; }
 }
 
 /* ── CONTACT INSIDE TEAM PAGE ──────────────────────────────── */
