@@ -335,8 +335,21 @@ a.ev-contact-row:hover { color: rgba(26,251,240,1); }
   .nav-bar { padding: 0.9rem 0.8rem; }
   .nav-logo-small { left: 0.8rem; }
   .nav-logo-img { width: 34px; height: 34px; }
-  .nav-m-logo-btn { display: none; }
-  .nav-tabs { gap: 0.2rem; padding: 0.3rem; }
+  .nav-m-logo-btn { 
+    display: flex;
+    left: 0.6rem;
+    right: auto;
+  }
+  .nav-m-logo { 
+    width: 38px; 
+    height: 38px;
+  }
+  .nav-tabs { 
+    gap: 0.2rem; 
+    padding: 0.3rem;
+    margin-left: auto;
+    margin-right: 0;
+  }
   .nav-tab { font-size: 0.62rem; padding: 0.55rem 0.9rem; letter-spacing: 0.08em; }
   .homepage { padding: 5rem 1rem 2rem; }
   .manusys-row span { font-size: clamp(2.5rem, 12vw, 7rem); }
@@ -354,9 +367,15 @@ a.ev-contact-row:hover { color: rgba(26,251,240,1); }
 @media (max-width: 480px) {
   .nav-logo-small { display: none; }
   .nav-m-logo-btn { 
-    display: none;
+    display: flex;
+    left: 0.5rem;
+    right: auto;
   }
   .nav-m-logo { width: 36px; height: 36px; }
+  .nav-tabs {
+    margin-left: auto;
+    margin-right: 0;
+  }
   .nav-tab { font-size: 0.58rem; padding: 0.5rem 0.75rem; letter-spacing: 0.06em; }
   .industry-text { font-size: 0.55rem; letter-spacing: 0.3em; }
   .events-subnav-tab { font-size: 0.58rem; padding: 0.9rem 0.9rem; }
@@ -414,8 +433,25 @@ a.ev-contact-row:hover { color: rgba(26,251,240,1); }
 }
 
 @media (max-width: 500px) {
-  .footer-grid { gap: 2rem; }
-  .footer-col { min-width: 150px; }
+  .footer-grid { 
+    gap: 1.5rem; 
+    justify-content: space-around;
+  }
+  .footer-col { 
+    min-width: unset;
+    flex: 1;
+    max-width: 45%;
+  }
+  .footer-col-label {
+    font-size: 0.55rem;
+  }
+  .footer-contact-row {
+    font-size: 0.7rem;
+    gap: 0.4rem;
+  }
+  .footer-divider-v {
+    min-height: 60px;
+  }
 }
 
 /* ── CONTACT INSIDE TEAM PAGE ──────────────────────────────── */
