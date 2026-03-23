@@ -59,6 +59,7 @@ import teamRoshni from "./assets/team_roshni.png";
 import teamIsrar from "./assets/team_israr.png";
 import teamVishwaKarthik from "./assets/team_vishwakarthik.png";
 import teamPragadeeshwaran from "./assets/team_pragadeeshwaran.png";
+import teamSaranyaGS from "./assets/team_saranya_gs.png";
 
 /* ─── STARFIELD ──────────────────────────────────────────── */
 const Starfield = () => {
@@ -83,7 +84,7 @@ const Starfield = () => {
 
 /* ─── NAV ────────────────────────────────────────────────── */
 const Nav = ({ activeTab, setActiveTab }) => {
-  const tabs = ["Home", "Events", "Workshops", "Team", "Contact"];
+  const tabs = ["Home", "Events", "Workshops", "Team"];
   const tabRefs = React.useRef([]);
   const pillRef = React.useRef(null);
 
@@ -217,7 +218,7 @@ const Home = () => {
 
   return (
     <section className="home-section">
-      {/* Hero letters */}
+      {/* Hero Banner with blueprint bg */}
       <div className="manusys-row">
         {letters.map((letter, i) => <span key={i} style={{ animationDelay: `${i * 0.2}s` }}>{letter}</span>)}
       </div>
@@ -226,8 +227,6 @@ const Home = () => {
         <span className="industry-text">INDUSTRY 5.0</span>
         <span className="industry-line" />
       </div>
-
-      {/* Manusys M logo — centered, links to home (already on home, acts as brand mark) */}
       <div className="home-m-logo-wrap">
         <img src={manusysMIcon} alt="Manusys" className="home-m-logo" />
       </div>
@@ -351,56 +350,15 @@ const Workshops = () => (
 );
 
 
-/* ─── OFFICE BEARERS ─────────────────────────────────────── */
-const officeBearers = [
-  { name: "Kishore Kumar", role: "Student Treasurer", img: teamKishore },
-  { name: "Malavika", role: "Events Secretary", img: teamMalavika2 },
-  { name: "Santhiya", role: "Alumni Relations", img: teamSanthiya },
-  { name: "Gokul", role: "Junior Secretary", img: teamGokul },
-  { name: "Roshni", role: "Junior Secretary", img: teamRoshni },
-  { name: "Israr", role: "Alumni Relations", img: teamIsrar },
-  { name: "Vishwa Karthik", role: "Events", img: teamVishwaKarthik },
+const MAPS_URL = "https://www.google.com/maps/dir/13.1200686,80.2255645/Department+Of+Manufacturing+Engineering,+Department,+MANUFACTURING+ENGINEERING+LAB,+ANNA+UNIVERSITY,+1,+1st+Cross+Rd,+Anna+University,+Kotturpuram,+Chennai,+Tamil+Nadu+600025/@13.0692565,80.1463476,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a52679f852757c9:0x32065fe84d11a197!2m2!1d80.234133!2d13.0120241?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D";
+
+const hrTeam = [
+  { name: "Akash J",   phone: "+918825816578" },
+  { name: "Vishnu K",  phone: "+918300362201" },
+  { name: "Hariharan", phone: "+918248537781" },
+  { name: "Swatiha V", phone: "+918925083884" },
+  { name: "Dhivya E",  phone: "+919345668253" },
 ];
-
-const Team = () => (
-  <section className="content-section dh-section">
-
-    {/* ── Office Bearers ── */}
-    <div className="team-sub-heading">Office Bearers</div>
-    <div className="dh-members-grid ob-grid">
-      {officeBearers.map((m, i) => (
-        <div key={i} className="dh-member-card ob-card" style={{ animationDelay: `${i * 0.07}s`, borderColor: "rgba(212,168,67,0.5)" }}>
-          <img src={m.img} alt={m.name} className="dh-member-photo" />
-          <div className="dh-member-badge">
-            <div className="dh-member-name">{m.name}</div>
-            <div className="dh-member-role">{m.role}</div>
-          </div>
-        </div>
-      ))}
-    </div>
-
-    {/* ── Domain Heads ── */}
-    <div className="team-sub-heading" style={{ marginTop: "2.5rem" }}>Domain Heads</div>
-    {domains.map((d, di) => (
-      <div key={di} className="dh-domain-block">
-        <div className="dh-domain-title" style={{ color: d.color }}>
-          <span className="dh-title-bar" style={{ background: d.color }} />
-          {d.name}
-        </div>
-        <div className="dh-members-grid">
-          {d.members.map((m, i) => (
-            <div key={i} className="dh-member-card" style={{ animationDelay: `${(di * 4 + i) * 0.06}s`, borderColor: d.color }}>
-              <img src={m.img} alt={m.name} className="dh-member-photo" />
-              <div className="dh-member-badge">
-                <div className="dh-member-name">{m.name}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
-  </section>
-);
 
 /* ─── DOMAIN HEADS (kept for data) ─────────────────────── */
 const domains = [
@@ -479,6 +437,102 @@ const domains = [
   },
 ];
 
+/* ─── OFFICE BEARERS ─────────────────────────────────────── */
+const officeBearers = [
+  { name: "Rusil V", role: "General Secretary", img: teamRusil },
+  { name: "Saranya R", role: "General Secretary", img: teamSaranyaGS },
+  { name: "Kishore Kumar", role: "Student Treasurer", img: teamKishore },
+  { name: "Malavika", role: "Events Secretary", img: teamMalavika2 },
+  { name: "Santhiya", role: "Alumni Relations", img: teamSanthiya },
+  { name: "Gokul", role: "Junior Secretary", img: teamGokul },
+  { name: "Roshni", role: "Junior Secretary", img: teamRoshni },
+  { name: "Israr", role: "Alumni Relations", img: teamIsrar },
+  { name: "Vishwa Karthik", role: "Events", img: teamVishwaKarthik },
+];
+
+const Team = () => (
+  <section className="content-section dh-section">
+
+    {/* ── Office Bearers ── */}
+    <div className="team-sub-heading">Office Bearers</div>
+    <div className="dh-members-grid ob-grid">
+      {officeBearers.map((m, i) => (
+        <div key={i} className="dh-member-card ob-card" style={{ animationDelay: `${i * 0.07}s`, borderColor: "rgba(212,168,67,0.5)" }}>
+          <img src={m.img} alt={m.name} className="dh-member-photo" />
+          <div className="dh-member-badge">
+            <div className="dh-member-name">{m.name}</div>
+            <div className="dh-member-role">{m.role}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* ── Domain Heads ── */}
+    <div className="team-sub-heading" style={{ marginTop: "2.5rem" }}>Domain Heads</div>
+    {domains.map((d, di) => (
+      <div key={di} className="dh-domain-block">
+        <div className="dh-domain-title" style={{ color: d.color }}>
+          <span className="dh-title-bar" style={{ background: d.color }} />
+          {d.name}
+        </div>
+        <div className="dh-members-grid">
+          {d.members.map((m, i) => (
+            <div key={i} className="dh-member-card" style={{ animationDelay: `${(di * 4 + i) * 0.06}s`, borderColor: d.color }}>
+              <img src={m.img} alt={m.name} className="dh-member-photo" />
+              <div className="dh-member-badge">
+                <div className="dh-member-name">{m.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    {/* ── Contact ── */}
+    <div className="team-sub-heading" style={{ marginTop: "2.5rem" }}>Contact</div>
+    <div className="contact-grid" style={{ padding: "0" }}>
+      <a href="tel:+917094450191" className="contact-card contact-card-link">
+        <div className="contact-icon">📞</div>
+        <div className="contact-role">Secretary</div>
+        <div className="contact-name">Rusil V</div>
+        <div className="contact-detail">+91 70944 50191</div>
+      </a>
+      <div className="contact-card contact-card-link" onClick={() => window.open(MAPS_URL, "_blank")}>
+        <div className="contact-icon">📍</div>
+        <div className="contact-role">Venue</div>
+        <div className="contact-name">Manufacturing Engg. Block</div>
+        <div className="contact-detail">CEG Main Campus · Get Directions →</div>
+      </div>
+      <div className="contact-card contact-card-link" onClick={() => window.open("https://www.instagram.com/manusys_ceg/", "_blank")}>
+        <div className="contact-icon"><img src={instagramLogo} alt="Instagram" className="contact-ig-logo" /></div>
+        <div className="contact-role">Instagram</div>
+        <div className="contact-name">@manusys_ceg</div>
+        <div className="contact-detail">Follow for updates</div>
+      </div>
+    </div>
+    <div className="contact-hr-block">
+      <div className="contact-hr-title">
+        <span className="contact-hr-line" />
+        <span>Human Resources</span>
+        <span className="contact-hr-line" />
+      </div>
+      <div className="contact-hr-grid">
+        {hrTeam.map((p, i) => (
+          <a key={i} href={"tel:" + p.phone} className="contact-hr-chip">
+            <span className="contact-hr-icon">📞</span>
+            <div className="contact-hr-name">{p.name}</div>
+            <div className="contact-hr-num">
+              {p.phone.slice(0,3) + " " + p.phone.slice(3,8) + " " + p.phone.slice(8)}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+
+
 const DomainHeads = () => (
   <section className="content-section dh-section">
     {domains.map((d, di) => (
@@ -503,19 +557,51 @@ const DomainHeads = () => (
         </div>
       </div>
     ))}
+
+    {/* ── Contact at the bottom ── */}
+    <div className="team-sub-heading" style={{ marginTop: "2.5rem" }}>Contact</div>
+    <div className="contact-grid">
+      <a href="tel:+917094450191" className="contact-card contact-card-link">
+        <div className="contact-icon">📞</div>
+        <div className="contact-role">Secretary</div>
+        <div className="contact-name">Rusil V</div>
+        <div className="contact-detail">+91 70944 50191</div>
+      </a>
+      <div className="contact-card contact-card-link" onClick={() => window.open(MAPS_URL, "_blank")}>
+        <div className="contact-icon">📍</div>
+        <div className="contact-role">Venue</div>
+        <div className="contact-name">Manufacturing Engg. Block</div>
+        <div className="contact-detail">CEG Main Campus · Get Directions →</div>
+      </div>
+      <div className="contact-card contact-card-link" onClick={() => window.open("https://www.instagram.com/manusys_ceg/", "_blank")}>
+        <div className="contact-icon"><img src={instagramLogo} alt="Instagram" className="contact-ig-logo" /></div>
+        <div className="contact-role">Instagram</div>
+        <div className="contact-name">@manusys_ceg</div>
+        <div className="contact-detail">Follow for updates</div>
+      </div>
+    </div>
+    <div className="contact-hr-block">
+      <div className="contact-hr-title">
+        <span className="contact-hr-line" />
+        <span>Human Resources</span>
+        <span className="contact-hr-line" />
+      </div>
+      <div className="contact-hr-grid">
+        {hrTeam.map((p, i) => (
+          <a key={i} href={"tel:" + p.phone} className="contact-hr-chip">
+            <span className="contact-hr-icon">📞</span>
+            <div className="contact-hr-name">{p.name}</div>
+            <div className="contact-hr-num">
+              {p.phone.slice(0,3) + " " + p.phone.slice(3,8) + " " + p.phone.slice(8)}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
   </section>
 );
 
 /* ─── CONTACT ────────────────────────────────────────────── */
-const MAPS_URL = "https://www.google.com/maps/dir/13.1200686,80.2255645/Department+Of+Manufacturing+Engineering,+Department,+MANUFACTURING+ENGINEERING+LAB,+ANNA+UNIVERSITY,+1,+1st+Cross+Rd,+Anna+University,+Kotturpuram,+Chennai,+Tamil+Nadu+600025/@13.0692565,80.1463476,12z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x3a52679f852757c9:0x32065fe84d11a197!2m2!1d80.234133!2d13.0120241?entry=ttu&g_ep=EgoyMDI2MDMxOC4xIKXMDSoASAFQAw%3D%3D";
-
-const hrTeam = [
-  { name: "Akash J",   phone: "+918825816578" },
-  { name: "Vishnu K",  phone: "+918300362201" },
-  { name: "Hariharan", phone: "+918248537781" },
-  { name: "Swatiha V", phone: "+918925083884" },
-  { name: "Dhivya E",  phone: "+919345668253" },
-];
 
 const Contact = () => (
   <section className="content-section contact-section">
@@ -572,17 +658,31 @@ const Contact = () => (
 /* ─── FOOTER ─────────────────────────────────────────────── */
 const Footer = () => (
   <footer className="footer-note">
-    <img src={manusysMIcon} alt="Manusys" className="footer-logo-img footer-m-logo" />
-    <div className="footer-contacts">
-      <a href="tel:+917094450191" className="footer-contact-chip">
-        <span>📞</span><span>Rusil · +91 70944 50191</span>
-      </a>
-      <a href="tel:+919790347160" className="footer-contact-chip">
-        <span>📞</span><span>Kishore Kumar · +91 97903 47160</span>
-      </a>
-      <a href="https://www.instagram.com/manusys_ceg/" target="_blank" rel="noopener noreferrer" className="footer-contact-chip">
-        <span>📸</span><span>@manusys_ceg</span>
-      </a>
+    <div className="footer-grid">
+      {/* Left column — phone contacts */}
+      <div className="footer-col">
+        <div className="footer-col-label">Contact Us</div>
+        <a href="tel:+917094450191" className="footer-contact-row">
+          <span>📞</span><span>Rusil &nbsp;·&nbsp; +91 70944 50191</span>
+        </a>
+        <a href="tel:+919790347160" className="footer-contact-row">
+          <span>📞</span><span>Kishore Kumar &nbsp;·&nbsp; +91 97903 47160</span>
+        </a>
+      </div>
+
+      {/* Divider */}
+      <div className="footer-divider-v" />
+
+      {/* Right column — email + instagram */}
+      <div className="footer-col">
+        <div className="footer-col-label">Connect</div>
+        <a href="mailto:ame.ceg@annauniv.edu" className="footer-contact-row">
+          <span>📧</span><span>ame.ceg@annauniv.edu</span>
+        </a>
+        <a href="https://www.instagram.com/manusys_ceg/" target="_blank" rel="noopener noreferrer" className="footer-contact-row">
+          <span>📸</span><span>@manusys_ceg</span>
+        </a>
+      </div>
     </div>
   </footer>
 );
@@ -596,7 +696,7 @@ export default function App() {
       case "Events": return <Events />;
       case "Workshops": return <Workshops />;
       case "Team": return <Team />;
-      case "Contact": return <Contact />;
+
       default: return <Home />;
     }
   };
@@ -605,7 +705,7 @@ export default function App() {
       <Starfield />
       <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className="homepage">
-        {activeTab === "Home" && <div key="home" className="page-transition"><Home /></div>}
+        {activeTab === "Home" && <div key="home" className="page-transition home-page-wrap"><Home /></div>}
         {activeTab !== "Home" && <div key={activeTab} className="page-transition tab-content-area">{renderSection()}</div>}
       </div>
       <Footer />
