@@ -153,13 +153,13 @@ const SponsorsMarquee = () => {
     setTimeout(() => {
       setCurrent(idx);
       setFading(false);
-    }, 400);
+    }, 600);
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       goTo((current + 1) % sponsors.length);
-    }, 3500);
+    }, 3000);
     return () => clearInterval(interval);
   }, [current]);
 
