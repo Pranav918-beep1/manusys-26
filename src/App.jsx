@@ -60,6 +60,10 @@ import teamIsrar from "./assets/team_israr.png";
 import teamVishwaKarthik from "./assets/team_vishwakarthik.png";
 import teamPragadeeshwaran from "./assets/team_pragadeeshwaran.png";
 import teamSaranyaGS from "./assets/team_saranya_gs.png";
+import teamSaiSankaraRam from "./assets/team_sai_sankara_ram.png";
+import teamSanthiyaNew from "./assets/team_santhiya_new.png";
+import teamSahitya from "./assets/team_santhiya.png";
+import teamAarya from "./assets/team_aarya.png";
 
 /* ─── STARFIELD ──────────────────────────────────────────── */
 const Starfield = () => {
@@ -379,7 +383,6 @@ const domains = [
       { name: "Althin S V", img: teamAkash },
       { name: "Roshan T", img: teamVishnu },
       { name: "Daksshin G", img: teamDhivya },
-      { name: "Navinkumaar P", img: teamHariharan },
     ],
   },
   {
@@ -424,6 +427,7 @@ const domains = [
     members: [
       { name: "Sujith P", img: teamSujith },
       { name: "Pragadeeshwaran", img: teamPragadeeshwaran },
+      { name: "Sai Sankara Ram VP", img: teamSaiSankaraRam },
     ],
   },
   {
@@ -443,11 +447,13 @@ const officeBearers = [
   { name: "Saranya R", role: "General Secretary", img: teamSaranyaGS },
   { name: "Kishore Kumar", role: "Student Treasurer", img: teamKishore },
   { name: "Malavika", role: "Events Secretary", img: teamMalavika2 },
-  { name: "Santhiya", role: "Alumni Relations", img: teamSanthiya },
+  { name: "Santhiya", role: "Alumni Relations", img: teamSanthiyaNew },
   { name: "Gokul", role: "Junior Secretary", img: teamGokul },
   { name: "Roshni", role: "Junior Secretary", img: teamRoshni },
   { name: "Israr", role: "Alumni Relations", img: teamIsrar },
   { name: "Vishwa Karthik", role: "Events", img: teamVishwaKarthik },
+  { name: "Sahitya", role: "Assistant Secretary", img: teamSahitya },
+  { name: "Aarya", role: "Assistant Secretary", img: teamAarya },
 ];
 
 const Team = () => (
