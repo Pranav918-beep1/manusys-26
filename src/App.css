@@ -149,22 +149,6 @@ a { text-decoration: none; color: inherit; }
   position: relative;
 }
 
-/* Blueprint background overlay */
-.blueprint-bg-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.85;
-  filter: brightness(1.05) contrast(1.15) saturate(1.2);
-  pointer-events: none;
-  z-index: -1;
-}
-
 .manusys-row {
   display: flex; flex-wrap: nowrap; justify-content: center;
   gap: 0 0.05em; padding: 2.5rem 0.5rem 0; overflow: hidden;
@@ -233,11 +217,16 @@ a { text-decoration: none; color: inherit; }
   height: 90px; 
   object-fit: contain; 
   filter: brightness(1) drop-shadow(0 0 14px rgba(135,206,235,0.4)); 
-  transition: filter 0.3s ease, transform 0.3s ease; 
+  transition: filter 0.3s ease, transform 0.3s ease;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 8px;
+  box-shadow: 0 4px 20px rgba(0, 150, 255, 0.2);
 }
 .home-m-logo:hover { 
   filter: brightness(1.1) drop-shadow(0 0 22px rgba(135,206,235,0.7)); 
-  transform: scale(1.05); 
+  transform: scale(1.05);
+  box-shadow: 0 6px 28px rgba(0, 150, 255, 0.35);
 }
 
 /* ── DEPT BUILDING ─────────────────────────────────────────── */

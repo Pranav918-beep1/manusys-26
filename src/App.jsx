@@ -62,6 +62,7 @@ import teamPragadeeshwaran from "./assets/team_pragadeeshwaran.png";
 import teamSaranyaGS from "./assets/team_saranya_gs.png";
 import teamSaiSankaraRam from "./assets/team_sai_sankara_ram.png";
 import teamSanthiyaNew from "./assets/team_santhiya_new.png";
+import teamMahidha from "./assets/team_mahidha_new.png"; // Updated import name
 import teamSahitya from "./assets/team_santhiya.png";
 import teamAarya from "./assets/team_aarya.png";
 
@@ -222,7 +223,7 @@ const Home = () => {
 
   return (
     <section className="home-section">
-      {/* Hero Banner with blueprint bg */}
+      {/* Hero Banner */}
       <div className="manusys-row">
         {letters.map((letter, i) => <span key={i} style={{ animationDelay: `${i * 0.2}s` }}>{letter}</span>)}
       </div>
@@ -448,6 +449,7 @@ const officeBearers = [
   { name: "Kishore Kumar", role: "Student Treasurer", img: teamKishore },
   { name: "Malavika", role: "Events Secretary", img: teamMalavika2 },
   { name: "Santhiya", role: "Alumni Relations", img: teamSanthiyaNew },
+  { name: "Mahidha", role: "Junior Secretary", img: teamMahidha },
   { name: "Gokul", role: "Junior Secretary", img: teamGokul },
   { name: "Roshni", role: "Junior Secretary", img: teamRoshni },
   { name: "Israr", role: "Alumni Relations", img: teamIsrar },
